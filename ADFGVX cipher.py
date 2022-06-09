@@ -27,7 +27,7 @@ def ADFGVX_cipher(exchange_key='BETA',cipher_alpha="ADFGVX",alpha='ABCDEFGHIJKLM
         for i in plain_text:
             raw_cipher_text+=table[i]
         if len(raw_cipher_text)%len(exchange_key)!=0:
-            for j in range(len(raw_cipher_text) % len(exchange_key),4):
+            for j in range(len(raw_cipher_text) % len(exchange_key),len(exchange_key)):
                 raw_cipher_text+=(cipher_alpha[rd.randint(0,len(cipher_alpha)-1)])                
         column=[[] for i in range(len(exchange_key))]
         i=0
@@ -65,8 +65,3 @@ def decrypt_ADFGVX_cipher(cipher_table={},exchange_key='BETA',cipher_text=''):
         plain_text+=cipher_table[raw_cipher_text[i:i+2]]
         #包含为了补全column而随机生成的乱码的解编码，解编码后会保留在句末
     print(plain_text)
-
-
-set=ADFGVX_cipher(plain_text='LINGEHAOSHUAI',exchange_key='TRUE')
-#decrypt_ADFGVX_cipher(exchange_key=set[2],cipher_table=set[0],cipher_text=set[1])
-decrypt_ADFGVX_cipher(set[0],set[1],set[2])
